@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/todo")
-@SecurityRequirement(name = "bearerAuth")
+@SecurityRequirement(name = "Authorization")
 @Tag(name = "Todo", description = "Todo resource endpoints.")
 public class TodoController {
 
