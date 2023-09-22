@@ -1,6 +1,6 @@
 @URL = http://localhost:8080/person
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkgYXV0aGVudGljYXRpb24iLCJpZCI6IjgwOTU2YTRmLWU4NTctNDFmOS04NjdmLThjZGZkZmRkMGMxYyIsInVzZXJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNjk1MzA2OTg2LCJleHAiOjE2OTUzMTA1ODYsImlzcyI6IlVURlBSIn0.iesszmf15EG7plHNUv-SVagJyc87JIqbLo47etrYGY0
+@token = Bearer 
 
 
 ### Obter todas pessoas

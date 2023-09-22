@@ -36,10 +36,18 @@ import br.edu.utfpr.todo.model.Person;
 import br.edu.utfpr.todo.model.RoleName;
 import br.edu.utfpr.todo.repository.RoleRepository;
 import br.edu.utfpr.todo.service.PersonService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/person")
 @CrossOrigin(origins = "*")
+@Tag(name = "Person", description = "Person resource endpoints")
 public class PersonController {
     @Autowired
     private PersonService personService;
@@ -81,12 +89,22 @@ public class PersonController {
         }
     }
 
+    @SecurityRequirement(name = "Authorization")
     @GetMapping
     public ResponseEntity<Page<Person>> getAll(
             @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok().body(personService.findAll(pageable));
     }
 
+    @Operation(summary = "Retrieve a Person by Id", description = "Get a Person object by specifying its id. The response is Person object with id, name, email and birth.", tags = {
+            "Person" })
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(schema = @Schema(implementation = Person.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "500")
+    })
+    @SecurityRequirement(name = "Authorization")
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable UUID id) {
         Optional<Person> person = this.personService.findById(id);
@@ -96,11 +114,13 @@ public class PersonController {
                 : ResponseEntity.notFound().build();
     }
 
+    @SecurityRequirement(name = "Authorization")
     @GetMapping("/name/{name}")
     public ResponseEntity<Object> getByName(@PathVariable String name) {
         return ResponseEntity.ok(personService.findByName(name));
     }
 
+    @SecurityRequirement(name = "Authorization")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable UUID id) {
         var person = personService.findById(id);
@@ -112,6 +132,7 @@ public class PersonController {
         return ResponseEntity.ok().build();
     }
 
+    @SecurityRequirement(name = "Authorization")
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         var person = this.personService.findById(id);

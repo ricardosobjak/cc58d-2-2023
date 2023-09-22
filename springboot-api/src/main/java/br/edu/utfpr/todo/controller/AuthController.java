@@ -25,8 +25,10 @@ import br.edu.utfpr.todo.dto.AuthDTO;
 import br.edu.utfpr.todo.dto.Message;
 import br.edu.utfpr.todo.model.Person;
 import br.edu.utfpr.todo.security.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "Auth", description = "Authentication resource endpoints.")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
