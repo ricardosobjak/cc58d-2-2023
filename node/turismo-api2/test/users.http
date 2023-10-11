@@ -1,4 +1,4 @@
-@URL=http://localhost:3000/users
+@URL=http://localhost:3001/users
 
 ### Obter todos
 GET {{URL}}
@@ -8,9 +8,27 @@ GET {{URL}}/1
 
 ### 
 POST {{URL}}
+Content-Type: application/json
+
+{
+    "name": "Janaina",
+    "email": "janaina@gmail.com",
+    "password": "1234",
+    "phone": "1231231"
+}
+
 
 ### 
-PUT {{URL}}
+PUT {{URL}}/651d9d39d7884ad118abaafd
+Content-Type: application/json
+
+{
+    "name": "Mariana",
+    "email": "mariana@gmail.com",
+    "password": "123456",
+    "phone": "11111"
+}
+
 
 ### 
 DELETE {{URL}}
